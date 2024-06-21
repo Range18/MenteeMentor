@@ -19,7 +19,13 @@ export class CreateUserDto {
   @IsNotEmpty()
   readonly phone: string;
 
-  @IsStrongPassword({ minLength: PASSWORD_MINLENGTH })
+  @IsStrongPassword({
+    minLength: PASSWORD_MINLENGTH,
+    minSymbols: 0,
+    minLowercase: 0,
+    minNumbers: 0,
+    minUppercase: 0,
+  })
   @IsString()
   @IsNotEmpty()
   readonly password: string;

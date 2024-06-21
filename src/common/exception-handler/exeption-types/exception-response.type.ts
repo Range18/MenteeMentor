@@ -5,6 +5,6 @@ export class ExceptionResponse {
   statusCode: HttpStatus;
   type?: string;
   message: string;
-  description?: string;
+  description?: string | object;
   output?: string;
 }

@@ -16,20 +16,34 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     let statusCode: number;
     let message: string;
+    let description: string | object;
 
     if (exception instanceof ApiException) {
       statusCode = exception.status;
       message = exception.message;
+      description = exception.description;
     } else if (exception instanceof HttpException) {
       statusCode = exception.getStatus();
-      message = exception.message;
+      description = exception.getResponse();
+      if (
+        exception.getResponse() &&
+        typeof exception.getResponse() === 'object'
+      ) {
+        const responseMessage = (<{ message: string[] | string }>(
+          exception.getResponse()
+        )).message;
+
+        message = Array.isArray(responseMessage)
+          ? responseMessage.join(', ')
+          : responseMessage;
+      } else {
+        message = exception.message;
+      }
     } else {
       statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
       message = 'INTERNAL_SERVER_ERROR';
     }
 
-    const description =
-      exception instanceof ApiException ? exception.description : undefined;
     const type = exception instanceof ApiException ? exception.type : undefined;
 
     if (statusCode === HttpStatus.INTERNAL_SERVER_ERROR) {
