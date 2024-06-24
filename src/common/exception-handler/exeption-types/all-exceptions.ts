@@ -21,6 +21,18 @@ export namespace AllExceptions {
     InvalidCode = 'Invalid verification code',
   }
 
+  export enum ProfileExceptions {
+    NotFound = 'Profile is not found',
+  }
+
+  export enum LanguageExceptions {
+    NotFound = 'Language is not found',
+  }
+
+  export enum SubjectExceptions {
+    NotFound = 'Subject is not found',
+  }
+
   export enum PermissionExceptions {
     NotTheSameUser = 'Action is forbidden because user is not owner',
     NoRequiredRole = 'You are not allowed to do that action, because of your role',

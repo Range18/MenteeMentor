@@ -11,6 +11,7 @@ import {
   ApiException,
   CustomExceptions,
 } from '#src/common/exception-handler/api-exception';
+import { plainToInstance } from 'class-transformer';
 
 type ExtractTypeOrNever<T, K> = T extends undefined ? never : K;
 
@@ -139,10 +140,6 @@ export abstract class BaseEntityService<
   formatToRdo(entities: Entity[]): EntityRdo[];
   formatToRdo(entity: Entity): EntityRdo;
   formatToRdo(entity: Entity | Entity[]): EntityRdo | EntityRdo[] {
-    if (Array.isArray(entity)) {
-      return entity.map((entity) => new this.entityDto(entity));
-    } else {
-      return new this.entityDto(entity);
-    }
+    return plainToInstance(this.entityDto, entity);
   }
 }

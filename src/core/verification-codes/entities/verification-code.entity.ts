@@ -9,7 +9,7 @@ import { UserEntity } from '#src/core/users/entity/user.entity';
 import { CustomBaseEntity } from '#src/common/base-entity/base.entity';
 
 @Entity('verification_codes')
-export class VerificationCode extends CustomBaseEntity {
+export class VerificationCodeEntity extends CustomBaseEntity {
   @PrimaryGeneratedColumn('increment')
   readonly id: number;
 

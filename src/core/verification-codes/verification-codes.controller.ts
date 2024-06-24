@@ -1,6 +1,6 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { VerificationCodesService } from './verification-codes.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { type UserRequest } from '#src/common/types/user-request.type';
 import { User } from '#src/common/decorators/User.decorator';
 import { VerifyCodeDto } from '#src/core/verification-codes/dto/verify-code.dto';
@@ -14,14 +14,17 @@ export class VerificationCodesController {
     private readonly verificationCodesService: VerificationCodesService,
   ) {}
 
+  @ApiCreatedResponse({ type: SuccessRdo })
   @AuthGuard()
   @Post()
-  async create(@User() user: UserRequest) {
-    return await this.verificationCodesService.save({
+  async create(@User() user: UserRequest): Promise<SuccessRdo> {
+    await this.verificationCodesService.save({
       user: { id: user.id },
       //TODO generate codes
       code: '1234',
     });
+
+    return { success: true };
   }
 
   @AuthGuard()

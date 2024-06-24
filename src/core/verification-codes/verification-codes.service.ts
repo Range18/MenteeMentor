@@ -1,20 +1,20 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { BaseEntityService } from '#src/common/base-entity/base-entity.service';
-import { VerificationCode } from '#src/core/verification-codes/entities/verification-code.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ApiException } from '#src/common/exception-handler/api-exception';
 import { AllExceptions } from '#src/common/exception-handler/exeption-types/all-exceptions';
+import { VerificationCodeEntity } from '#src/core/verification-codes/entities/verification-code.entity';
 import CodeExceptions = AllExceptions.CodeExceptions;
 
 @Injectable()
 export class VerificationCodesService extends BaseEntityService<
-  VerificationCode,
+  VerificationCodeEntity,
   'CodeExceptions'
 > {
   constructor(
-    @InjectRepository(VerificationCode)
-    private readonly verificationCodeRepository: Repository<VerificationCode>,
+    @InjectRepository(VerificationCodeEntity)
+    private readonly verificationCodeRepository: Repository<VerificationCodeEntity>,
   ) {
     super(
       verificationCodeRepository,

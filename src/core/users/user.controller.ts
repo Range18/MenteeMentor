@@ -7,7 +7,7 @@ import { User } from '#src/common/decorators/User.decorator';
 import { UpdateUserDto } from '#src/core/users/dto/update-user.dto';
 import { AuthGuard } from '#src/common/decorators/guards/auth-guard.decorator';
 
-@ApiTags('users')
+@ApiTags('Users')
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -17,18 +17,18 @@ export class UserController {
     return this.userService.formatToRdo(await this.userService.find({}));
   }
 
-  @Get(':id')
-  async getUser(@Param('id') id: number): Promise<GetUserRdo> {
-    return this.userService.formatToRdo(
-      await this.userService.findOne({ where: { id } }, true),
-    );
-  }
-
   @AuthGuard()
   @Get('me')
   async getUserMe(@User() user: UserRequest): Promise<GetUserRdo> {
     return this.userService.formatToRdo(
       (await this.userService.findOne({ where: { id: user.id } }))!,
+    );
+  }
+
+  @Get(':id')
+  async getUser(@Param('id') id: number): Promise<GetUserRdo> {
+    return this.userService.formatToRdo(
+      await this.userService.findOne({ where: { id } }, true),
     );
   }
 
