@@ -33,6 +33,14 @@ export namespace AllExceptions {
     NotFound = 'Subject is not found',
   }
 
+  export enum QuestionExceptions {
+    NotFound = 'Question is not found',
+  }
+
+  export enum TagExceptions {
+    NotFound = 'Tag is not found',
+  }
+
   export enum PermissionExceptions {
     NotTheSameUser = 'Action is forbidden because user is not owner',
     NoRequiredRole = 'You are not allowed to do that action, because of your role',

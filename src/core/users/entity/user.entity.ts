@@ -10,6 +10,7 @@ import { CustomBaseEntity } from '#src/common/base-entity/base.entity';
 import { VerificationCodeEntity } from '#src/core/verification-codes/entities/verification-code.entity';
 import { ProfileEntity } from '#src/core/users/profiles/entities/profile.entity';
 import { Exclude } from 'class-transformer';
+import { QuestionEntity } from '#src/core/questions/entities/question.entity';
 
 @Entity('users')
 export class UserEntity extends CustomBaseEntity {
@@ -40,6 +41,11 @@ export class UserEntity extends CustomBaseEntity {
     onDelete: 'SET NULL',
   })
   profile: ProfileEntity;
+
+  @OneToMany(() => QuestionEntity, (question) => question.userCreated, {
+    nullable: true,
+  })
+  questions?: QuestionEntity[];
 
   @OneToOne(() => VerificationCodeEntity, (code) => code.user, {
     nullable: true,
