@@ -4,9 +4,11 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ProfileEntity } from '#src/core/users/profiles/entities/profile.entity';
+import { QuestionEntity } from '#src/core/questions/entities/question.entity';
 
 @Entity('subjects')
 export class SubjectEntity extends BaseEntity {
@@ -25,4 +27,9 @@ export class SubjectEntity extends BaseEntity {
     inverseJoinColumn: { name: 'profile', referencedColumnName: 'id' },
   })
   profiles?: ProfileEntity[];
+
+  @OneToMany(() => QuestionEntity, (question) => question.subject, {
+    nullable: true,
+  })
+  questions?: QuestionEntity[];
 }

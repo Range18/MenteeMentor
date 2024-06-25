@@ -3,9 +3,10 @@ import { SubjectsService } from './subjects.service';
 import { SubjectsController } from './subjects.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SubjectEntity } from '#src/core/subjects/entities/subject.entity';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([SubjectEntity])],
+  imports: [TypeOrmModule.forFeature([SubjectEntity]), TagsModule],
   controllers: [SubjectsController],
   providers: [SubjectsService],
   exports: [SubjectsService],
