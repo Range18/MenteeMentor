@@ -1,6 +1,1 @@
-export type TimeToAnswerType =
-  | 'morning'
-  | 'afternoon'
-  | 'evening'
-  | 'now'
-  | string;
+export const TimeToAnswerType = ['morning', 'afternoon', 'evening', 'now'];

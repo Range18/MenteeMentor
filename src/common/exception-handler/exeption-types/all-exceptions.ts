@@ -37,8 +37,8 @@ export namespace AllExceptions {
     NotFound = 'Question is not found',
   }
 
-  export enum TagExceptions {
-    NotFound = 'Tag is not found',
+  export enum ThemeExceptions {
+    NotFound = 'Theme is not found',
   }
 
   export enum PermissionExceptions {

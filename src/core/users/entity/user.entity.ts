@@ -36,6 +36,12 @@ export class UserEntity extends CustomBaseEntity {
   @Column({ nullable: false, default: false })
   isVerified: boolean;
 
+  @Column({ nullable: false, default: 0 })
+  coins: number;
+
+  @Column({ nullable: false, default: 0 })
+  tickets: number;
+
   @OneToOne(() => ProfileEntity, (profile) => profile.user, {
     nullable: true,
     onDelete: 'SET NULL',

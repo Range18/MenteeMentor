@@ -1,6 +1,6 @@
 import { IsOptional, IsString } from 'class-validator';
 
-export class GetTagDto {
+export class GetThemeQuery {
   @IsString()
   @IsOptional()
   readonly subject?: string;

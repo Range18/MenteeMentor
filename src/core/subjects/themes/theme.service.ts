@@ -1,24 +1,29 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { BaseEntityService } from '#src/common/base-entity/base-entity.service';
-import { TagEntity } from '#src/core/subjects/tags/entities/tag.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ApiException } from '#src/common/exception-handler/api-exception';
+import { ThemeRdo } from '#src/core/subjects/themes/rdo/theme.rdo';
+import { ThemeEntity } from '#src/core/subjects/themes/entities/theme.entity';
 import { AllExceptions } from '#src/common/exception-handler/exeption-types/all-exceptions';
-import TagExceptions = AllExceptions.TagExceptions;
+import ThemeExceptions = AllExceptions.ThemeExceptions;
 
 @Injectable()
-export class TagsService extends BaseEntityService<TagEntity, 'TagExceptions'> {
+export class ThemeService extends BaseEntityService<
+  ThemeEntity,
+  'ThemeExceptions',
+  ThemeRdo
+> {
   constructor(
-    @InjectRepository(TagEntity)
-    private readonly tagsRepository: Repository<TagEntity>,
+    @InjectRepository(ThemeEntity)
+    private readonly themesRepository: Repository<ThemeEntity>,
   ) {
     super(
-      tagsRepository,
+      themesRepository,
       new ApiException(
         HttpStatus.NOT_FOUND,
-        'TagExceptions',
-        TagExceptions.NotFound,
+        'ThemeExceptions',
+        ThemeExceptions.NotFound,
       ),
     );
   }

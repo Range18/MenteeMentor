@@ -10,6 +10,7 @@ import { TokenModule } from '#src/core/token/token.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([QuestionEntity]),
+
     UserModule,
     SessionModule,
     TokenModule,

@@ -8,8 +8,7 @@ import {
 import { CustomBaseEntity } from '#src/common/base-entity/base.entity';
 import { UserEntity } from '#src/core/users/entity/user.entity';
 import { SubjectEntity } from '#src/core/subjects/entities/subject.entity';
-import { type AnswerFormatType } from '#src/core/questions/types/answer-format.type';
-import { type TimeToAnswerType } from '#src/core/questions/types/time-to-answer.type';
+import { ThemeEntity } from '#src/core/subjects/themes/entities/theme.entity';
 
 @Entity('questions')
 export class QuestionEntity extends CustomBaseEntity {
@@ -36,23 +35,28 @@ export class QuestionEntity extends CustomBaseEntity {
   @JoinColumn({ name: 'subject' })
   subject: SubjectEntity;
 
-  // tag
+  @ManyToOne(() => ThemeEntity, (theme) => theme.questions, {
+    nullable: false,
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'theme' })
+  theme: ThemeEntity;
 
   @Column({ type: 'varchar', nullable: false })
-  timeToAnswer: TimeToAnswerType;
+  timeToAnswer: string;
 
   @Column({ type: 'varchar', nullable: false })
-  answerFormat: AnswerFormatType;
+  answerFormat: string;
 
   @Column({ nullable: false })
   duration: number;
 
   @Column({ nullable: false })
-  tickets: number;
+  readonly tickets: number;
 
   @Column({ nullable: false })
   coins: number;
 
   @Column({ nullable: false, default: false })
-  isFirst: boolean;
+  readonly isFirst: boolean;
 }

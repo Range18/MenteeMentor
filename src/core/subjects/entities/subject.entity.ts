@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { ProfileEntity } from '#src/core/users/profiles/entities/profile.entity';
 import { QuestionEntity } from '#src/core/questions/entities/question.entity';
+import { ThemeEntity } from '#src/core/subjects/themes/entities/theme.entity';
 
 @Entity('subjects')
 export class SubjectEntity extends BaseEntity {
@@ -17,6 +18,11 @@ export class SubjectEntity extends BaseEntity {
 
   @Column({ nullable: false })
   name: string;
+
+  @OneToMany(() => ThemeEntity, (theme) => theme.subject, {
+    nullable: true,
+  })
+  themes?: ThemeEntity[];
 
   @ManyToMany(() => ProfileEntity, (profile) => profile.subjects, {
     nullable: true,
@@ -32,4 +38,7 @@ export class SubjectEntity extends BaseEntity {
     nullable: true,
   })
   questions?: QuestionEntity[];
+
+  @Column({ nullable: false, default: false })
+  isLanguage: boolean;
 }

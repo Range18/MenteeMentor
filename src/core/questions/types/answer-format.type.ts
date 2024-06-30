@@ -1,1 +1,1 @@
-export type AnswerFormatType = 'videoCall' | 'message' | 'dontCare';
+export const AnswerFormatType = ['videoCall', 'message', 'dontCare'];

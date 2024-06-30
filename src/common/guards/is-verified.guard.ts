@@ -1,10 +1,16 @@
-import { CanActivate, ExecutionContext, HttpStatus } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import { UserService } from '#src/core/users/user.service';
 import { RequestExtended } from '#src/common/types/request-extended.type';
 import { ApiException } from '#src/common/exception-handler/api-exception';
 import { AllExceptions } from '#src/common/exception-handler/exeption-types/all-exceptions';
 import AuthExceptions = AllExceptions.AuthExceptions;
 
+@Injectable()
 export class IsVerifiedGuardClass implements CanActivate {
   constructor(private readonly userService: UserService) {}
 

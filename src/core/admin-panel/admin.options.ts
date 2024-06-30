@@ -8,6 +8,7 @@ import { LanguageEntity } from '#src/core/languages/entities/language.entity';
 import { ProfileEntity } from '#src/core/users/profiles/entities/profile.entity';
 import { QuestionEntity } from '#src/core/questions/entities/question.entity';
 import { ThemeEntity } from '#src/core/subjects/themes/entities/theme.entity';
+import { SiteSettingsEntity } from '#src/core/admin-panel/entities/site-settings.entity';
 
 export const adminOptions = {
   adminJsOptions: {
@@ -21,6 +22,7 @@ export const adminOptions = {
       LanguageEntity,
       QuestionEntity,
       ThemeEntity,
+      SiteSettingsEntity,
     ],
   },
   auth: {

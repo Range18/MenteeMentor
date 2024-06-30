@@ -11,6 +11,10 @@ export class GetUserRdo {
 
   readonly isVerified: boolean;
 
+  readonly coins: number;
+
+  readonly tickets: number;
+
   readonly updatedAt: Date;
 
   readonly createdAt: Date;
