@@ -9,6 +9,7 @@ import AdminJS from 'adminjs';
 import { Database, Resource } from '@adminjs/typeorm';
 import { adminOptions } from '#src/core/admin-panel/admin.options';
 import { VerificationCodesModule } from '#src/core/verification-codes/verification-codes.module';
+import { AdminSettingsModule } from '#src/core/admin-panel/admin-settings.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { VerificationCodesModule } from '#src/core/verification-codes/verificati
         return adminOptions;
       },
     }),
+    AdminSettingsModule,
     UserModule,
     SessionModule,
     TokenModule,

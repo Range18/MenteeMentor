@@ -9,6 +9,7 @@ import { AllExceptions } from '#src/common/exception-handler/exeption-types/all-
 import bcrypt from 'bcrypt';
 import { passwordSaltRounds } from '#src/common/configs/config';
 import { VerificationCodesService } from '#src/core/verification-codes/verification-codes.service';
+import { AdminService } from '#src/core/admin-panel/admin.service';
 import AuthExceptions = AllExceptions.AuthExceptions;
 import UserExceptions = AllExceptions.UserExceptions;
 
@@ -18,6 +19,7 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly sessionService: SessionService,
     private readonly verificationCodesService: VerificationCodesService,
+    private readonly adminService: AdminService,
   ) {}
 
   async register(createUserDto: CreateUserDto): Promise<LoggedUserRdo> {
@@ -40,6 +42,10 @@ export class AuthService {
       ...createUserDto,
       password: await bcrypt.hash(createUserDto.password, passwordSaltRounds),
     });
+
+    await this.userService.save(
+      await this.adminService.setDefaultValuesForUser(userEntity),
+    );
 
     const session = await this.sessionService.createSession({
       userId: userEntity.id,
